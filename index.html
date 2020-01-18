@@ -1,135 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>CRUD sin Framework</title>
-    <link rel="stylesheet" href="css/style.css" />
-  </head>
-  <body>
-    <header>
-      <h1>Registro de Empleados</h1>
-    </header>
 
-    <nav>
-      <a id="btnAdd"><span>Agregar</span></a>
-    </nav>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>CRUD sin Framework</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
 
-    <section>
-      <table id="myTable">
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Edad</th>
-            <th>Cargo</th>
-            <th>Foto</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </section>
+<body>
+  <header>
+    <h1>Registro de Empleados</h1>
+  </header>
 
-    <section>
-      <br />
-      <canvas width="64px" height="64px"></canvas>
-    </section>
+  <nav>
+    <a class="btnAdd"><span>Agregar</span></a>
+  </nav>
 
-    <div id="addModal" class="modal">
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <p>Hola, soy un modal</p>
-        <form
-          action="index.html"
-          method="POST"
-          enctype="multipart/form-data"
-          name="myForm"
-        >
-          <label>Nombre</label>
-          <br />
-          <input type="text" name="nombre" />
-          <br />
-          <label>Apellido</label>
-          <br />
-          <input type="text" name="apellido" />
-          <br />
-          <label>Edad</label>
-          <br />
-          <input type="number" name="edad" />
-          <br />
-          <label>Cargo</label>
-          <br />
-          <select name="cargo">
-            <option value="Programador">Programador</option>
-            <option value="Diseñador">Diseñador</option>
-            <option value="Redes">Redes</option>
-            <option value="Gerente">Gerente</option>
-          </select>
-          <br />
-          <label>Foto</label>
-          <br />
+  <section>
+    <table id="myTable">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Edad</th>
+          <th>Cargo</th>
+          <th>Foto</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </section>
 
-          <input type="file" name="foto" accept="image/x-png,image/jpeg" />
-          <br />
-          <div class="image-file">
-            <canvas id="addCanvasPreview" width="64" height="64"></canvas>
-          </div>
-          <br />
-          <br />
-          <button type="submit">Guardar</button>
-        </form>
-      </div>
+  <section>
+    <br />
+    <canvas width="64px" height="64px"></canvas>
+  </section>
+
+
+
+  <footer>
+
+  </footer>
+
+  <!----- Modals ----->
+
+  <div id="addModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p>Hola, soy un modal</p>
+      <form action="index.html" method="POST" enctype="multipart/form-data" name="addForm">
+        <input type="hidden" name="id" value="-1">
+        <label>Nombre</label>
+        <br />
+        <input type="text" name="nombre" />
+        <br />
+        <label>Apellido</label>
+        <br />
+        <input type="text" name="apellido" />
+        <br />
+        <label>Edad</label>
+        <br />
+        <input type="number" name="edad" />
+        <br />
+        <label>Cargo</label>
+        <br />
+        <select name="cargo">
+          <option value="Programador">Programador</option>
+          <option value="Diseñador">Diseñador</option>
+          <option value="Redes">Redes</option>
+          <option value="Gerente">Gerente</option>
+        </select>
+        <br />
+        <label>Foto</label>
+        <br />
+
+        <input type="file" name="foto" accept="image/x-png,image/jpeg" />
+        <br />
+        <div class="image-file">
+          <canvas id="canvasPreview" width="64" height="64"></canvas>
+        </div>
+        <br />
+        <br />
+        <button type="submit">Guardar</button>
+      </form>
     </div>
+  </div>
 
-    <div id="editModal" class="modal">
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <p>Hola, soy un edit Modal</p>
-        <form
-          action="index.html"
-          method="POST"
-          enctype="multipart/form-data"
-          name="myForm"
-        >
-          <label>Nombre</label>
-          <br />
-          <input type="text" name="nombre" />
-          <br />
-          <label>Apellido</label>
-          <br />
-          <input type="text" name="apellido" />
-          <br />
-          <label>Edad</label>
-          <br />
-          <input type="number" name="edad" />
-          <br />
-          <label>Cargo</label>
-          <br />
-          <select name="cargo">
-            <option value="Programador">Programador</option>
-            <option value="Diseñador">Diseñador</option>
-            <option value="Redes">Redes</option>
-            <option value="Gerente">Gerente</option>
-          </select>
-          <br />
-          <label>Foto</label>
-          <br />
+  <div id="editModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p>Hola, soy un edit Modal</p>
+      <form action="index.html" method="POST" enctype="multipart/form-data" name="editForm">
+        <label>Nombre</label>
+        <br />
+        <input type="text" name="nombre" />
+        <br />
+        <label>Apellido</label>
+        <br />
+        <input type="text" name="apellido" />
+        <br />
+        <label>Edad</label>
+        <br />
+        <input type="number" name="edad" />
+        <br />
+        <label>Cargo</label>
+        <br />
+        <select name="cargo">
+          <option value="Programador">Programador</option>
+          <option value="Diseñador">Diseñador</option>
+          <option value="Redes">Redes</option>
+          <option value="Gerente">Gerente</option>
+        </select>
+        <br />
+        <label>Foto</label>
+        <br />
 
-          <input type="file" name="foto" accept="image/x-png,image/jpeg" />
-          <br />
-          <div class="image-file">
-            <canvas id="addCanvasPreview" width="64" height="64"></canvas>
-          </div>
-          <br />
-          <br />
-          <button type="submit">Guardar</button>
-        </form>
-      </div>
+        <input type="file" name="foto" accept="image/x-png,image/jpeg" />
+        <br />
+        <div class="image-file">
+          <canvas id="canvasPreview" width="64" height="64"></canvas>
+        </div>
+        <br />
+        <br />
+        <button type="submit">Guardar</button>
+      </form>
     </div>
+  </div>
 
-    <footer></footer>
-  </body>
-  <script src="js/route/list.js" type="module"></script>
-  <script src="js/route/add.js" type="module"></script>
+  <div id="deleteModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p>Hola, soy un edit Modal</p>
+      <form action="index.html" method="POST" enctype="multipart/form-data" name="deleteForm">
+
+        <label>Nombre</label>
+        <br />
+        <input type="text" name="nombre" />
+        <br />
+        <label>Apellido</label>
+        <br />
+        <input type="text" name="apellido" />
+        <br />
+        <label>Edad</label>
+        <br />
+        <input type="number" name="edad" />
+        <br />
+        <label>Cargo</label>
+        <br />
+        <select name="cargo">
+          <option value="Programador">Programador</option>
+          <option value="Diseñador">Diseñador</option>
+          <option value="Redes">Redes</option>
+          <option value="Gerente">Gerente</option>
+        </select>
+        <br />
+        <label>Foto</label>
+        <br />
+
+        <input type="file" name="foto" accept="image/x-png,image/jpeg" />
+        <br />
+        <div class="image-file">
+          <canvas id="canvasPreview" width="64" height="64"></canvas>
+        </div>
+        <br />
+        <br />
+        <button type="submit">Guardar</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="detailsModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p>Hola, soy un edit Modal</p>
+      <form action="index.html" method="POST" enctype="multipart/form-data" name="detailsForm">
+        <label>Nombre</label>
+        <br />
+        <input type="text" name="nombre" />
+        <br />
+        <label>Apellido</label>
+        <br />
+        <input type="text" name="apellido" />
+        <br />
+        <label>Edad</label>
+        <br />
+        <input type="number" name="edad" />
+        <br />
+        <label>Cargo</label>
+        <br />
+        <select name="cargo">
+          <option value="Programador">Programador</option>
+          <option value="Diseñador">Diseñador</option>
+          <option value="Redes">Redes</option>
+          <option value="Gerente">Gerente</option>
+        </select>
+        <br />
+        <label>Foto</label>
+        <br />
+
+        <input type="file" name="foto" accept="image/x-png,image/jpeg" />
+        <br />
+        <div class="image-file">
+          <canvas id="canvasPreview" width="64" height="64"></canvas>
+        </div>
+        <br />
+        <br />
+        <button type="submit">Guardar</button>
+      </form>
+    </div>
+  </div>
+
+</body>
+<script src="js/script/index.js" type="module"></script>
+
 </html>

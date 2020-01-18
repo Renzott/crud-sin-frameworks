@@ -98,6 +98,12 @@ const closeAfterSubmitModal = (actualForm) => {
     actualForm.offsetParent.style.display = "none";
 }
 
+const clearForm = (actualForm) => {
+
+    //actualForm.elements
+
+}
+
 window.oninput = ev => {
     if (ev.srcElement.type == "file") {
         var canvas = document.getElementById("canvasPreview");

@@ -10,7 +10,7 @@ class Storage {
 
         var currentDataEmpleados = JSON.parse(localStorage.getItem("Empleados"));
 
-        if(currentDataEmpleados == null | currentDataEmpleados.length < 1) 
+        if(currentDataEmpleados == null) 
             return [];
 
         return currentDataEmpleados;

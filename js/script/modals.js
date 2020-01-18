@@ -8,27 +8,6 @@ var allModals = [
     { Modal: "detailsModal", Button: "details" },
 ];
 
-const showHideModal = (actualModal) => {
-    var modal = document.getElementById(actualModal);
-    var span = modal.getElementsByClassName("close")[0];
-
-    modal.style.display = "block";
-
-    span.onclick = () => {
-        modal.style.display = "none";
-    };
-
-    window.onclick = event => {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    };
-}
-
-const closeAfterSubmitModal = (actualForm) => {
-    console.log(actualForm);
-    actualForm.offsetParent.style.display = "none";
-}
 
 const openModals = (optionSelected) => {
     var actualNameModal = allModals.find(x => x.Button == optionSelected.option).Modal;
@@ -36,7 +15,11 @@ const openModals = (optionSelected) => {
 
     switch (optionSelected.option) {
         case "btnAdd":
-            actualModal.firstElementChild.children[2].id.value = parseInt(EmpleadoService.ListaEmpleados().pop().id) + 1;
+
+            if (EmpleadoService.ListaEmpleados().length > 0)
+                actualModal.firstElementChild.children[2].id.value = parseInt(EmpleadoService.ListaEmpleados().pop().id) + 1;
+            else
+                actualModal.firstElementChild.children[2].id.value = 0
             showHideModal(actualNameModal);
 
             console.log(optionSelected)
@@ -55,13 +38,16 @@ const openModals = (optionSelected) => {
 
 }
 
+
+// Event Submit Forms Modals
+
 window.addEventListener("submit", async ev => {
     ev.preventDefault()
 
     var actualForm = ev.srcElement
     var formData = new FormData(actualForm)
     var actualEmpleado = new Person();
-    console.log(actualForm)
+
     for (var [key, value] of formData.entries()) {
         if (key == "foto") {
             var canvasPreview = actualForm.getElementsByTagName("canvas")[0]
@@ -89,6 +75,28 @@ window.addEventListener("submit", async ev => {
     }
 
 })
+
+const showHideModal = (actualModal) => {
+    var modal = document.getElementById(actualModal);
+    var span = modal.getElementsByClassName("close")[0];
+
+    modal.style.display = "block";
+
+    span.onclick = () => {
+        modal.style.display = "none";
+    };
+
+    window.onclick = event => {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    };
+}
+
+const closeAfterSubmitModal = (actualForm) => {
+    console.log(actualForm);
+    actualForm.offsetParent.style.display = "none";
+}
 
 window.oninput = ev => {
     if (ev.srcElement.type == "file") {

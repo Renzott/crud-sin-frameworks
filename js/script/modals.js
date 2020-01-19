@@ -20,21 +20,41 @@ const openModals = (optionSelected) => {
                 actualModal.firstElementChild.children[2].id.value = parseInt(EmpleadoService.ListaEmpleados().pop().id) + 1;
             else
                 actualModal.firstElementChild.children[2].id.value = 0
-            showHideModal(actualNameModal);
-
-            console.log(optionSelected)
             break;
         case "delete":
-
-            console.log(EmpleadoService.BorrarEmpleado(optionSelected.value));
+            //actualModal.firstElementChild.children[2].id.value = parseInt(EmpleadoService.ListaEmpleados().pop().id) + 1;
+            actualModal.firstElementChild.children[2].id.value = optionSelected.value
             break;
         case "edit":
-            console.log(optionSelected)
+            var actualEmpleado = EmpleadoService.BuscarEmpleado(optionSelected.value);
+
+            for (var [key, valueEmpleado] of Object.entries(actualEmpleado)) {
+                if (key == "foto") {
+                    var imgEditPreview = new Image();
+                    imgEditPreview.src = valueEmpleado;
+
+                    var editCanvas = actualModal.getElementsByTagName("canvas")[0]
+                    var contextEditCanvas = editCanvas.getContext("2d");
+
+                    imgEditPreview.onload = () => {
+                        contextEditCanvas.drawImage(imgEditPreview, 0, 0, 64, 64);
+                    };
+
+                } else {
+                    actualModal.firstElementChild.children[2][key].value = valueEmpleado
+                }
+            }
+
+
+
             break;
         case "details":
-            console.log(optionSelected)
+            var actualEmpleado = EmpleadoService.BuscarEmpleado(optionSelected.value);
+            console.log(actualEmpleado)
             break;
     }
+
+    showHideModal(actualNameModal);
 
 }
 
@@ -60,57 +80,71 @@ window.addEventListener("submit", async ev => {
     switch (actualForm.name) {
         case "addForm":
             EmpleadoService.CrearEmpleado(actualEmpleado)
-            closeAfterSubmitModal(actualForm)
             break;
         case "editForm":
-            console.log(formName + "- ")
+            EmpleadoService.ActualizarEmpleado(actualEmpleado)
             break;
         case "deleteForm":
-            EmpleadoService.BorrarEmpleado()
-            console.log(formName + "- ")
+            EmpleadoService.BorrarEmpleado(actualEmpleado.id)
             break;
         case "detailsForm":
-            console.log(formName + "- ")
             break;
     }
+
+    clearForm(actualForm)
+    closeAfterSubmitModal(actualForm)
 
 })
 
 const showHideModal = (actualModal) => {
-    var modal = document.getElementById(actualModal);
-    var span = modal.getElementsByClassName("close")[0];
+    var modal = document.getElementById(actualModal)
+    var form = modal.getElementsByTagName("form")[0]
+    var span = modal.getElementsByClassName("close")[0]
+    
 
-    modal.style.display = "block";
-
+    modal.style.display = "block"
+    
     span.onclick = () => {
-        modal.style.display = "none";
+        modal.style.display = "none"
+        clearForm(form)
     };
 
     window.onclick = event => {
         if (event.target == modal) {
-            modal.style.display = "none";
+            modal.style.display = "none"
+            clearForm(form)
         }
     };
 }
 
 const closeAfterSubmitModal = (actualForm) => {
-    console.log(actualForm);
+
     actualForm.offsetParent.style.display = "none";
 }
 
+/**
+ * 
+ * @param {HTMLFormElement} actualForm 
+ */
 const clearForm = (actualForm) => {
 
-    //actualForm.elements
+    if (actualForm.name != "deleteForm") {
+        var actualCanvas = actualForm.getElementsByTagName("canvas")[0]
+        var contextActualCanvas = actualCanvas.getContext('2d')
 
+        contextActualCanvas.clearRect(0, 0, actualCanvas.width, actualCanvas.height)
+    }
+
+    actualForm.reset();
 }
 
 window.oninput = ev => {
     if (ev.srcElement.type == "file") {
-        var canvas = document.getElementById("canvasPreview");
+        var canvas = ev.srcElement.parentNode.getElementsByTagName("canvas")[0]
         var context = canvas.getContext("2d");
-
+        console.log(ev.srcElement);
         var blob = URL.createObjectURL(ev.srcElement.files[0]);
-        console.log(blob);
+
         var imgPreview = new Image();
         imgPreview.src = blob;
 

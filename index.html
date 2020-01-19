@@ -94,6 +94,7 @@
       <span class="close">&times;</span>
       <p>Hola, soy un edit Modal</p>
       <form action="index.html" method="POST" enctype="multipart/form-data" name="editForm">
+        <input type="hidden" name="id" value="-1">
         <label>Nombre</label>
         <br />
         <input type="text" name="nombre" />
@@ -117,7 +118,7 @@
         <br />
         <label>Foto</label>
         <br />
-
+        
         <input type="file" name="foto" accept="image/x-png,image/jpeg" />
         <br />
         <div class="image-file">
@@ -135,38 +136,7 @@
       <span class="close">&times;</span>
       <p>Hola, soy un edit Modal</p>
       <form action="index.html" method="POST" enctype="multipart/form-data" name="deleteForm">
-
-        <label>Nombre</label>
-        <br />
-        <input type="text" name="nombre" />
-        <br />
-        <label>Apellido</label>
-        <br />
-        <input type="text" name="apellido" />
-        <br />
-        <label>Edad</label>
-        <br />
-        <input type="number" name="edad" />
-        <br />
-        <label>Cargo</label>
-        <br />
-        <select name="cargo">
-          <option value="Programador">Programador</option>
-          <option value="Diseñador">Diseñador</option>
-          <option value="Redes">Redes</option>
-          <option value="Gerente">Gerente</option>
-        </select>
-        <br />
-        <label>Foto</label>
-        <br />
-
-        <input type="file" name="foto" accept="image/x-png,image/jpeg" />
-        <br />
-        <div class="image-file">
-          <canvas id="canvasPreview" width="64" height="64"></canvas>
-        </div>
-        <br />
-        <br />
+          <input type="hidden" name="id" value="-1">
         <button type="submit">Guardar</button>
       </form>
     </div>

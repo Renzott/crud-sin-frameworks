@@ -130,8 +130,8 @@ class Storage {
             // Busco el index del empleado solicitado
             var selectIndexEmpleado = this.findEmpleado(updateEmpleado.id, true)
 
-            // Verifico si "selectEmpleado" es -1
-            if (selectIndexEmpleado) {
+            // Verifico si "selectEmpleado" es -1 o menos
+            if (selectIndexEmpleado > -1) {
 
                 // Modifico el actual index del empleado por el nuevo registro de empleado seleccionado
                 actualDataEmpleados[selectIndexEmpleado] = updateEmpleado;

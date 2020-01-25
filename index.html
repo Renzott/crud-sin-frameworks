@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <title>CRUD sin Framework</title>
   <link rel="stylesheet" href="css/style.css" />
@@ -19,24 +19,93 @@
   </nav>
 
   <section>
-    <table id="myTable">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nombre</th>
-          <th>Apellido</th>
-          <th>Edad</th>
-          <th>Cargo</th>
-          <th>Foto</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
+    <div style="overflow-x:auto;">
+      <table id="myTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Edad</th>
+            <th>Cargo</th>
+            <th>Foto</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="data-empleado">
+            <td>0</td>
+            <td>Pepito</td>
+            <td>Juanito</td>
+            <td>23</td>
+            <td>prog</td>
+            <td>Foto</td>
+          </tr>
+          <tr class="data-empleado">
+            <td>1</td>
+            <td>Pepito</td>
+            <td>Juanito</td>
+            <td>23</td>
+            <td>prog</td>
+            <td>Foto</td>
+          </tr>
+          <tr class="data-empleado">
+            <td>2</td>
+            <td>Pepito</td>
+            <td>Juanito</td>
+            <td>23</td>
+            <td>prog</td>
+            <td>Foto</td>
+          </tr>
+        </tbody>
+
+      </table>
+    </div>
   </section>
 
   <section>
-    <br />
-    <canvas width="64px" height="64px"></canvas>
+    <div class="cards">
+      <div class="person-selected">
+        <div class="person-image">
+            
+        </div>
+        <div class="person-name">
+          <span style="font-weight: bold;">Haga Click en un Empleado</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body delete">
+          <div class="card-image">
+            <img src="/img/icons/delete.svg">
+          </div>
+          <div class="card-text">
+            <span>Borrar</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body edit">
+          <div class="card-image">
+            <img src="/img/icons/edit.svg">
+          </div>
+          <div class="card-text">
+            <span>Editar</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body details">
+          <div class="card-image">
+            <img src="/img/icons/details.svg">
+          </div>
+          <div class="card-text">
+            <span>Detalles</span>
+          </div>
+        </div>
+      </div>
+      
+    </div>
   </section>
 
 
@@ -118,7 +187,7 @@
         <br />
         <label>Foto</label>
         <br />
-        
+
         <input type="file" name="foto" accept="image/x-png,image/jpeg" />
         <br />
         <div class="image-file">
@@ -136,7 +205,7 @@
       <span class="close">&times;</span>
       <p>Hola, soy un edit Modal</p>
       <form action="index.html" method="POST" enctype="multipart/form-data" name="deleteForm">
-          <input type="hidden" name="id" value="-1">
+        <input type="hidden" name="id" value="-1">
         <button type="submit">Guardar</button>
       </form>
     </div>
@@ -147,35 +216,23 @@
       <span class="close">&times;</span>
       <p>Hola, soy un edit Modal</p>
       <form action="index.html" method="POST" enctype="multipart/form-data" name="detailsForm">
-        <label>Nombre</label>
+
+        <label name="id">-1</label>
         <br />
-        <input type="text" name="nombre" />
+        <label name="nombre">Nombre</label>
         <br />
-        <label>Apellido</label>
+        <label name="apellido">Apellido</label>
         <br />
-        <input type="text" name="apellido" />
+        <label name="edad">Edad</label>
         <br />
-        <label>Edad</label>
-        <br />
-        <input type="number" name="edad" />
-        <br />
-        <label>Cargo</label>
-        <br />
-        <select name="cargo">
-          <option value="Programador">Programador</option>
-          <option value="Diseñador">Diseñador</option>
-          <option value="Redes">Redes</option>
-          <option value="Gerente">Gerente</option>
-        </select>
+        <label name="cargo">Cargo</label>
         <br />
         <label>Foto</label>
-        <br />
-
-        <input type="file" name="foto" accept="image/x-png,image/jpeg" />
         <br />
         <div class="image-file">
           <canvas id="canvasPreview" width="64" height="64"></canvas>
         </div>
+
         <br />
         <br />
         <button type="submit">Guardar</button>

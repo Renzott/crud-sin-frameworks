@@ -1,13 +1,41 @@
-table th,
-td {
-  border: rgb(0, 0, 0) 1px solid;
+*{
+  margin: 0px;
+  padding: 0px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body{
+  background-color: #fefefe;
+}
+
+nav{
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+nav > a {
+  width: 30%;
+  border: 1px solid;
+}
+
+table{
+  width: 100%;
+}
+
+
+td{
+  text-align: center;
 }
 
 .modal {
   display: none;
   position: fixed;
   z-index: 1;
-  padding-top: 100px;
+  padding-top: 50px;
   left: 0;
   top: 0;
   width: 100%;
@@ -37,4 +65,47 @@ td {
   color: #000;
   text-decoration: none;
   cursor: pointer;
+}
+
+section{
+  width: 100%;
+  height: auto;
+}
+
+.cards{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  margin-top: 30px;
+}
+.person-selected{
+  grid-column: span 3;
+  text-align: center;
+}
+.card{
+  height: 60%;
+}
+
+.card-image img{
+  width: 100%;
+  height: 40px;
+}
+
+.card-image > img {
+  width: 30px;
+  display: block;
+  margin: auto;
+}
+
+.card-text span {
+  display: block;
+  text-align: center;
+}
+
+.data-empleado{
+  transition: .1s;
+}
+
+.data-empleado:hover{
+  background-color: rgba(0, 0, 255, 0.219);
 }

@@ -50,7 +50,21 @@ const openModals = (optionSelected) => {
             break;
         case "details":
             var actualEmpleado = EmpleadoService.BuscarEmpleado(optionSelected.value);
-            console.log(actualEmpleado)
+            for (var [key, valueEmpleado] of Object.entries(actualEmpleado)) {
+                if (key == "foto") {
+                    var imgEditPreview = new Image();
+                    imgEditPreview.src = valueEmpleado;
+
+                    var editCanvas = actualModal.getElementsByTagName("canvas")[0]
+                    var contextEditCanvas = editCanvas.getContext("2d");
+
+                    imgEditPreview.onload = () => {
+                        contextEditCanvas.drawImage(imgEditPreview, 0, 0, 64, 64);
+                    };
+                }else{
+                    actualModal.querySelector(`label[name=${key}]`).innerText = valueEmpleado
+                }
+            }
             break;
     }
 
@@ -150,9 +164,9 @@ window.oninput = ev => {
 
         imgPreview.onload = () => {
             context.drawImage(imgPreview, 0, 0, 64, 64);
-        };
+        }
     }
-};
+}
 
 
 export { openModals }

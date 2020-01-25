@@ -1,12 +1,13 @@
 import { Person } from "../model/Person.js"
 import { EmpleadoService } from "../controller/EmpleadoController.js"
-import {openModals} from "../script/modals.js"
+import { openModals } from "../script/modals.js"
+import { clickOption } from "../script/options.js"
 
 // Instancio las opciones de mantenimiento de los Empleados
 var optionsValue = [
-    {option:"delete",value: -1}, 
-    {option:"edit", value: -1}, 
-    {option:"details", value: -1}];
+    { option: "delete", value: -1 },
+    { option: "edit", value: -1 },
+    { option: "details", value: -1 }];
 
 /**
  * 
@@ -43,7 +44,7 @@ const llenarTabla = listaEmpleados => {
 
             // Añadiendo las opciones de mantenimiento de los Empleados
 
-            optionsValue.map(currentOption => {
+            /*optionsValue.map(currentOption => {
                 var optionsCell = newRow.insertCell(-1);
                 var options = document.createElement("img");
 
@@ -57,7 +58,7 @@ const llenarTabla = listaEmpleados => {
                     var indexClick = event.srcElement.className;
 
                     optionsValue.map(currentOptionSelected => {
-                        if(currentOptionSelected.option == indexClick){
+                        if (currentOptionSelected.option == indexClick) {
                             currentOptionSelected.value = currentEmpleado.id;
                             openModals(currentOptionSelected);
                         }
@@ -66,7 +67,7 @@ const llenarTabla = listaEmpleados => {
                 }
 
                 optionsCell.appendChild(options);
-            })
+            })*/
 
         })
     }
@@ -77,19 +78,22 @@ const llenarTabla = listaEmpleados => {
 // Setup
 (() => {
 
-    var addOption = [{option:"btnAdd",value: -1}]
+    var addOption = [{ option: "btnAdd", value: -1 }]
 
     var db = EmpleadoService.ListaEmpleados();
     llenarTabla(db);
 
     var btnAdd = document.getElementsByClassName(addOption[0].option)[0];
 
-    btnAdd.onclick = (event) => {
+    btnAdd.onclick = () => {
         openModals(addOption[0])
     }
 
+    clickOption();
+
     EmpleadoService.ActualizacionDataEmpleado(newData => {
         llenarTabla(newData);
+        clickOption();   
     })
 
 })();
